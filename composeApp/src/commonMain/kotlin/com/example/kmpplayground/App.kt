@@ -47,6 +47,8 @@ import com.composables.core.SheetDetent.Companion.Hidden
 import com.composables.core.rememberBottomSheetState
 import com.composables.core.rememberModalBottomSheetState
 import com.composeunstyled.Button
+import com.multiplatform.webview.web.WebView
+import com.multiplatform.webview.web.rememberWebViewState
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -67,6 +69,8 @@ fun App() {
                 detents = listOf(Hidden, FullyExpanded)
 
             )
+            val state = rememberWebViewState("https://example.com")
+
 
             Button(
                 onClick = { sheetState.targetDetent = FullyExpanded },
@@ -102,13 +106,16 @@ fun App() {
                         backgroundColor = Color.White,
                         contentColor = Color.Black
                     ) {
-                        Box(Modifier.fillMaxWidth().height(600.dp), contentAlignment = Alignment.TopCenter) {
-                            DragIndication(
-                                modifier = Modifier.padding(top = 22.dp)
-                                    .background(Color.Black.copy(0.4f), RoundedCornerShape(100))
-                                    .width(32.dp)
-                                    .height(4.dp)
-                            )
+                        Box(Modifier.fillMaxWidth().height(600.dp)) {
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                DragIndication(
+                                    modifier = Modifier.padding(top = 22.dp)
+                                        .background(Color.Black.copy(0.4f), RoundedCornerShape(100))
+                                        .width(32.dp)
+                                        .height(4.dp)
+                                )
+                                WebView(state)
+                            }
                         }
                     }
                 }
