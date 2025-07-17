@@ -70,13 +70,17 @@ fun App() {
 
             )
             val state = rememberWebViewState("https://example.com")
+            state.webSettings.backgroundColor = Color.White
 
 
             Button(
                 onClick = { sheetState.targetDetent = FullyExpanded },
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .padding(WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal).asPaddingValues()),
+                    .padding(
+                        WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal)
+                            .asPaddingValues()
+                    ),
                 shape = RoundedCornerShape(6.dp),
                 contentPadding = PaddingValues(horizontal = 14.dp, vertical = 10.dp),
                 backgroundColor = Color.White
@@ -95,7 +99,10 @@ fun App() {
                         .let { if (isCompact) it else it.padding(horizontal = 56.dp) }
                         .displayCutoutPadding()
                         .statusBarsPadding()
-                        .padding(WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal).asPaddingValues())) {
+                        .padding(
+                            WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal)
+                                .asPaddingValues()
+                        )) {
                     Sheet(
                         modifier = Modifier
                             .shadow(4.dp, RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
@@ -106,7 +113,7 @@ fun App() {
                         backgroundColor = Color.White,
                         contentColor = Color.Black
                     ) {
-                        Box(Modifier.fillMaxWidth().height(600.dp)) {
+                        Box(Modifier.fillMaxWidth().height(600.dp).background(color = Color.White)) {
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                 DragIndication(
                                     modifier = Modifier.padding(top = 22.dp)
@@ -114,7 +121,11 @@ fun App() {
                                         .width(32.dp)
                                         .height(4.dp)
                                 )
-                                WebView(state)
+                                WebView(
+                                    state,
+                                    modifier = Modifier.fillMaxSize()
+                                        .background(color = Color.White),
+                                )
                             }
                         }
                     }
