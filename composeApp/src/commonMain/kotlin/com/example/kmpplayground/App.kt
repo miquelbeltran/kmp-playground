@@ -73,20 +73,39 @@ fun App() {
             state.webSettings.backgroundColor = Color.White
 
 
-            Button(
-                onClick = { sheetState.targetDetent = FullyExpanded },
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .padding(
-                        WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal)
-                            .asPaddingValues()
-                    ),
-                shape = RoundedCornerShape(6.dp),
-                contentPadding = PaddingValues(horizontal = 14.dp, vertical = 10.dp),
-                backgroundColor = Color.White
-            ) {
-                Text("Show Sheet", fontWeight = FontWeight(500))
+            Column(modifier = Modifier.fillMaxSize().align(Alignment.Center)) {
+                NativeToggle(
+                    modifier = Modifier.width(120.dp).height(50.dp),
+                    value = true,
+                    onClick = { value ->
+                        println("Clicked Me: $value")
+                    }
+                )
+
+                GlassButton(
+                    modifier = Modifier.width(120.dp).height(50.dp),
+                    label = "Click Me",
+                    onClick = {
+                        println("Clicked Me")
+                    },
+                )
+
+                Button(
+                    onClick = { sheetState.targetDetent = FullyExpanded },
+                    modifier = Modifier
+                        .padding(
+                            WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal)
+                                .asPaddingValues()
+                        ),
+                    shape = RoundedCornerShape(6.dp),
+                    contentPadding = PaddingValues(horizontal = 14.dp, vertical = 10.dp),
+                    backgroundColor = Color.White
+                ) {
+                    Text("Show Sheet", fontWeight = FontWeight(500))
+                }
+
             }
+
 
             val isCompact = maxWidth < 600.dp
             ModalBottomSheet(
@@ -113,7 +132,9 @@ fun App() {
                         backgroundColor = Color.White,
                         contentColor = Color.Black
                     ) {
-                        Box(Modifier.fillMaxWidth().height(600.dp).background(color = Color.White)) {
+                        Box(
+                            Modifier.fillMaxWidth().height(600.dp).background(color = Color.White)
+                        ) {
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                 DragIndication(
                                     modifier = Modifier.padding(top = 22.dp)
